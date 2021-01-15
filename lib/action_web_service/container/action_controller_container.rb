@@ -5,8 +5,10 @@ module ActionWebService # :nodoc:
       def self.included(base) # :nodoc:
         class << base
           include ClassMethods
-          alias_method_chain :inherited, :api
-          alias_method_chain :web_service_api, :require
+          alias_method :api, :inherited
+          alias_method :inherited, :api
+          alias_method :require, :web_service_api
+          alias_method :web_service_api, :require
         end
       end
 
